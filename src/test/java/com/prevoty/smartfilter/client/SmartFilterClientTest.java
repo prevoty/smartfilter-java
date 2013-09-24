@@ -4,14 +4,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class SmartFilterClientTest {
-    private String validApiKey = "valid api key goes here";
+    private String validApiKey = "api key goes here";
     private String invalidApiKey = "invalid key";
-    private String validRuleKey = "valid rule key goes here";
+    private String validRuleKey = "rule key goes here";
     private String invalidRuleKey = "invalid key";
-    private String input = "the <script>alert('quick brown fox');</script> jumps over the lazy dog & google.com";
-    private String validUrlIdentifier = "valid url identifier";
-    private String invaliddUrlIdentifier = "invalid url identifier";
-    private String url = "http://google.com";
+    private String input = "the <script>alert('quick brown fox');</script> jumps over the lazy dog & http://prevoty.com";
+    private String validUrlIdentifier = "http://prevoty.com";
 
     // Key Verification
 
@@ -70,16 +68,10 @@ public class SmartFilterClientTest {
 
     // URL Results
 
-    @Test(expected = BadInputParameterException.class)
-    public void testUrlInformationWithInvalidUrlIdentifier() throws NetworkException, BadApiKeyException, BadInputParameterException {
-        SmartFilterClient client = new SmartFilterClient(validApiKey);
-        client.UrlResults(invaliddUrlIdentifier);
-    }
-
     @Test
     public void testUrlInformationWithValidUrlIdentifier() throws RequestTooLargeException, NetworkException, BadApiKeyException, AccountQuotaException, BadInputParameterException {
         SmartFilterClient client = new SmartFilterClient(validApiKey);
         UrlInformation urlInformation = client.UrlResults(validUrlIdentifier);
-        assertEquals(url, urlInformation.url);
+        assertEquals(validUrlIdentifier, urlInformation.analysis.url);
     }
 }

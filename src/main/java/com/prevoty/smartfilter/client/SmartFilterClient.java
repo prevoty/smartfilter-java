@@ -193,7 +193,7 @@ public class SmartFilterClient {
         try {
             String url = this.apiBase + "/url/results";
             HttpGet request = new HttpGet(url);
-            URI uri = new URIBuilder(request.getURI()).addParameter("api_key", this.apiKey).addParameter("id", urlIdentifier).build();
+            URI uri = new URIBuilder(request.getURI()).addParameter("api_key", this.apiKey).addParameter("url", urlIdentifier).build();
             request.setURI(uri);
 
             HttpResponse response = httpClient.execute(request);

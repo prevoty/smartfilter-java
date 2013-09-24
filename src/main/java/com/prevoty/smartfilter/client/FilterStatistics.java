@@ -13,11 +13,11 @@ public class FilterStatistics {
     public int javascript_tags = 0;
     public int prevoty_profanity_features = 0;
     public int prevoty_spam_features = 0;
-    public HashMap<String,String> prevoty_link_metadata = new HashMap<String, String>();
+    public HashMap<String,Boolean> prevoty_link_metadata = new HashMap<String, Boolean>();
     public int tags_balanced = 0;
     public int transformations = 0;
 
-    public FilterStatistics(int invalid_attributes, int invalid_protocols, int invalid_tags, int blacklisted_phrases, int flagged_phrases, int javascript_attributes, int javascript_protocols, int javascript_tags, int prevoty_profanity_features, int prevoty_spam_features, HashMap<String, String> prevoty_link_metadata, int tags_balanced, int transformations) {
+    public FilterStatistics(int invalid_attributes, int invalid_protocols, int invalid_tags, int blacklisted_phrases, int flagged_phrases, int javascript_attributes, int javascript_protocols, int javascript_tags, int prevoty_profanity_features, int prevoty_spam_features, HashMap<String, Boolean> prevoty_link_metadata, int tags_balanced, int transformations) {
         this.invalid_attributes = invalid_attributes;
         this.invalid_protocols = invalid_protocols;
         this.invalid_tags = invalid_tags;
