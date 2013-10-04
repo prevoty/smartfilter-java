@@ -13,7 +13,7 @@ public class FilterStatistics {
     public int javascript_tags = 0;
     public int prevoty_profanity_features = 0;
     public int prevoty_spam_features = 0;
-    public HashMap<String,Boolean> prevoty_link_metadata = new HashMap<String, Boolean>();
+    public HashMap<String, Boolean> prevoty_link_metadata = new HashMap<String, Boolean>();
     public int tags_balanced = 0;
     public int transformations = 0;
 
