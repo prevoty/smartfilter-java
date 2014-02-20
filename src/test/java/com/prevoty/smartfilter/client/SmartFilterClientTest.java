@@ -1,7 +1,9 @@
 package com.prevoty.smartfilter.client;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SmartFilterClientTest {
     private String validApiKey = "api key goes here";
@@ -9,7 +11,6 @@ public class SmartFilterClientTest {
     private String validRuleKey = "rule key goes here";
     private String invalidRuleKey = "invalid key";
     private String input = "the <script>alert('quick brown fox');</script> jumps over the lazy dog & http://prevoty.com";
-    private String validUrlIdentifier = "http://prevoty.com";
 
     // Key Verification
 
@@ -40,7 +41,7 @@ public class SmartFilterClientTest {
         assertEquals("api_key is valid", result.message);
     }
 
-    // Rule Verify
+    // Rule Verification
 
     @Test(expected = BadInputParameterException.class)
     public void testRuleVerifyForInvalidRuleKeyFails() throws RequestTooLargeException, NetworkException, BadApiKeyException, AccountQuotaException, BadInputParameterException {
@@ -64,14 +65,5 @@ public class SmartFilterClientTest {
         assertEquals(0, result.statistics.javascript_protocols);
         assertEquals(2, result.statistics.javascript_tags);
         assertEquals(0, result.statistics.tags_balanced);
-    }
-
-    // URL Results
-
-    @Test
-    public void testUrlInformationWithValidUrlIdentifier() throws RequestTooLargeException, NetworkException, BadApiKeyException, AccountQuotaException, BadInputParameterException {
-        SmartFilterClient client = new SmartFilterClient(validApiKey);
-        UrlInformation urlInformation = client.UrlResults(validUrlIdentifier);
-        assertEquals(validUrlIdentifier, urlInformation.analysis.url);
     }
 }

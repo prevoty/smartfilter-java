@@ -186,41 +186,4 @@ public class SmartFilterClient {
             httpClient.getConnectionManager().shutdown();
         }
     }
-
-    // Endpoint: /url/results
-    public UrlInformation UrlResults(String urlIdentifier) throws NetworkException, BadInputParameterException, BadApiKeyException {
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-        try {
-            String url = this.apiBase + "/url/results";
-            HttpGet request = new HttpGet(url);
-            URI uri = new URIBuilder(request.getURI()).addParameter("api_key", this.apiKey).addParameter("url", urlIdentifier).build();
-            request.setURI(uri);
-
-            HttpResponse response = httpClient.execute(request);
-            ResponseHandler<String> handler = new BasicResponseHandler();
-            String body = handler.handleResponse(response);
-
-            switch (response.getStatusLine().getStatusCode()) {
-                case 200:
-                    Gson gson = new Gson();
-                    return gson.fromJson(body, UrlInformation.class);
-                case 400:
-                    throw new BadInputParameterException();
-                case 403:
-                    throw new BadApiKeyException();
-                case 500:
-                    throw new InternalError();
-                default:
-                    throw new NetworkException();
-            }
-        } catch (ClientProtocolException e) {
-            throw new BadApiKeyException();
-        } catch (IOException e) {
-            throw new NetworkException();
-        } catch (URISyntaxException e) {
-            throw new NetworkException();
-        } finally {
-            httpClient.getConnectionManager().shutdown();
-        }
-    }
 }
